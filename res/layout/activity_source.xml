@@ -1,0 +1,36 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ie.rm.activities.Source"
+    tools:ignore="MergeRootFrame" >
+
+    <ImageButton
+        android:id="@+id/selectCameraButton"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="90dp"
+        android:layout_height="80dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="42dp"
+        android:layout_marginTop="110dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/camera"
+        tools:ignore="ContentDescription"
+        android:onClick="intentToStartCamera" />
+
+    <ImageButton
+        android:id="@+id/selectGalleryButton"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="90dp"
+        android:layout_height="80dp"
+        android:layout_alignBaseline="@+id/selectCameraButton"
+        android:layout_alignBottom="@+id/selectCameraButton"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="27dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/gallery"
+        tools:ignore="ContentDescription" />
+
+</RelativeLayout>
