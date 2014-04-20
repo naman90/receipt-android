@@ -63,6 +63,13 @@
             android:enabled="true"
             android:exported="false"
             android:label="Dropbox Sync" />
+
+        <activity
+            android:name="ie.rm.activities.AddReceipt"
+            android:label="@string/title_activity_add_receipt" 
+            android:parentActivityName="ie.rm.activities.ReceiptDisplay"
+            >
+        </activity>
     </application>
 
 </manifest>

@@ -5,6 +5,7 @@ import ie.rm.activities.util.ExifUtil;
 
 import java.io.File;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -22,8 +23,9 @@ public class ReceiptDisplay extends Base {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_receipt_display);
 		TouchImageView imageView=(TouchImageView)findViewById(R.id.receiptImageView);
-		Receipt receipt= (Receipt)getIntent().getExtras().getSerializable("receipt");
-		mCurrentPhotoPath=receipt.getImageUrl();
+	    if(getIntent().getExtras()!=null &&getIntent().getExtras().getSerializable("receipt")!=null)
+		   receipt= (Receipt)getIntent().getExtras().getSerializable("receipt");
+		mCurrentPhotoPath=receipt.getImage();
 		if(mCurrentPhotoPath!=null && mCurrentPhotoPath.length()>0){
 			setPic(imageView);
 		}
@@ -33,7 +35,7 @@ public class ReceiptDisplay extends Base {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.receipt_display, menu);
+		getMenuInflater().inflate(R.menu.accept_menu, menu);
 		return true;
 	}
 	
@@ -42,8 +44,10 @@ public class ReceiptDisplay extends Base {
 	 @Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.imageAccept:
-			
+		case R.id.menuAccept:
+			Bundle receiptBundle = new Bundle();
+			receiptBundle.putSerializable("receipt", receipt);
+	        goToActivity(this, AddReceipt.class, receiptBundle);
 			return true;
 		default:
             return super.onOptionsItemSelected(item);

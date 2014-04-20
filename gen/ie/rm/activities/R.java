@@ -44,35 +44,52 @@ public final class R {
         public static final int ic_launcher=0x7f020005;
     }
     public static final class id {
-        public static final int action_search=0x7f090006;
-        public static final int action_settings=0x7f090007;
-        public static final int addReceiptHomeButton=0x7f090004;
+        public static final int action_search=0x7f09000f;
+        public static final int action_settings=0x7f090010;
+        public static final int addReceiptHomeButton=0x7f09000c;
         public static final int container=0x7f090000;
-        public static final int homeListReceipt=0x7f090005;
-        public static final int imageAccept=0x7f090008;
+        public static final int datePicker=0x7f09000b;
+        public static final int description=0x7f090006;
+        public static final int descriptionLabel=0x7f090007;
+        public static final int euroLabel=0x7f09000a;
+        public static final int homeListReceipt=0x7f09000d;
+        public static final int menuAccept=0x7f09000e;
+        public static final int price=0x7f090008;
+        public static final int priceLabel=0x7f090009;
         public static final int receiptImageView=0x7f090001;
         public static final int selectCameraButton=0x7f090002;
         public static final int selectGalleryButton=0x7f090003;
+        public static final int storeName=0x7f090005;
+        public static final int storeNameLabel=0x7f090004;
     }
     public static final class layout {
         public static final int activity_receipt_display=0x7f030000;
         public static final int activity_source=0x7f030001;
-        public static final int home=0x7f030002;
+        public static final int add_receipt=0x7f030002;
+        public static final int home=0x7f030003;
     }
     public static final class menu {
-        public static final int actiobaritems=0x7f080000;
-        public static final int home=0x7f080001;
-        public static final int receipt_display=0x7f080002;
-        public static final int source=0x7f080003;
+        public static final int accept_menu=0x7f080000;
+        public static final int actiobaritems=0x7f080001;
+        public static final int add_receipt=0x7f080002;
+        public static final int home=0x7f080003;
+        public static final int source=0x7f080004;
     }
     public static final class string {
         public static final int action_accept=0x7f060004;
         public static final int action_search=0x7f060003;
         public static final int action_settings=0x7f060001;
+        public static final int add_edit_receiptButton=0x7f06000e;
+        public static final int add_edit_receipt_button=0x7f06000f;
         public static final int app_name=0x7f060000;
+        public static final int descriptionLabel=0x7f06000b;
+        public static final int euroSymbol=0x7f06000c;
         public static final int hello_world=0x7f060002;
         public static final int home_add_receipt_button=0x7f060005;
+        public static final int priceLabel=0x7f06000d;
         public static final int receiptView=0x7f060008;
+        public static final int storeName=0x7f06000a;
+        public static final int title_activity_add_receipt=0x7f060009;
         public static final int title_activity_receipt_display=0x7f060007;
         public static final int title_activity_source=0x7f060006;
     }

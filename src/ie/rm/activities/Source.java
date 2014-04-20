@@ -66,8 +66,10 @@ public class Source extends Base {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		Intent intent = new Intent(this, ReceiptDisplay.class);
 		Bundle imageLocation = new Bundle();
-		Receipt receipt = new Receipt();
-		receipt.setImageUrl(mCurrentPhotoPath);
+		if(receipt==null){
+		 receipt = new Receipt();
+		 receipt.setImage(mCurrentPhotoPath);
+		}
 		imageLocation.putSerializable("receipt", receipt);
 		intent.putExtras(imageLocation);
         startActivity(intent);

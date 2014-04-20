@@ -1,0 +1,112 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ie.rm.activities.AddReceipt"
+    tools:ignore="MergeRootFrame" >
+
+    <TextView
+        android:id="@+id/storeNameLabel"
+        android:layout_width="80dp"
+        android:layout_height="20dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/storeName"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <EditText
+        android:id="@+id/storeName"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_alignBaseline="@+id/storeNameLabel"
+        android:layout_alignBottom="@+id/storeNameLabel"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/storeNameLabel"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:inputType="text"
+        android:nextFocusDown="@+id/description"
+        android:ems="10" 
+        />
+
+    <TextView
+        android:id="@+id/descriptionLabel"
+        android:layout_width="80dp"
+        android:layout_height="20dp"
+        android:layout_alignBottom="@+id/description"
+        android:layout_below="@+id/storeNameLabel"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/descriptionLabel"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+    
+    <EditText
+        android:id="@+id/description"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_toRightOf="@+id/descriptionLabel"
+        android:nextFocusDown="@+id/price"
+        android:layout_below="@+id/storeName"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:inputType="text"
+        android:ems="10" 
+         />
+
+    <TextView
+        android:id="@+id/priceLabel"
+        android:layout_width="80dp"
+        android:layout_height="20dp"
+        android:layout_alignBottom="@+id/euroLabel"
+        android:layout_below="@+id/descriptionLabel"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/priceLabel"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/euroLabel"
+        android:layout_width="15dp"
+        android:layout_height="20dp"
+        android:layout_alignBottom="@+id/price"
+        android:layout_below="@+id/description"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@+id/priceLabel"
+        android:gravity="center"
+        android:text="@string/euroSymbol" />
+
+    <EditText
+        android:id="@+id/price"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_toRightOf="@+id/euroLabel"
+        android:layout_below="@+id/description"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:inputType="numberDecimal"
+        android:ems="10" >
+
+       
+    </EditText>
+
+    <DatePicker
+        android:id="@+id/datePicker"
+        android:layout_below="@+id/euroLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="15dp"
+        android:calendarViewShown="false" />
+
+</RelativeLayout>

@@ -29,6 +29,7 @@ public class Base extends Activity {
 
 	protected 		Bundle 				activityInfo;
 	public 			Fragment 			coffeeFragment;
+	static Receipt receipt;
 	
 ; 
 
