@@ -1,22 +1,28 @@
 package ie.rm.activities;
 
-import ie.rm.activities.R;
-import android.os.Bundle;
-import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
 public class Home extends Base {
+	private ReceiptFragment receiptFragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.home);
 	}
+	
+	 @Override
+		protected void onResume() {
+		  super.onResume();		
+		  receiptFragment = new ReceiptFragment(); //create a new Fragment
+	      getFragmentManager().beginTransaction().add(R.id.fragment_layout, receiptFragment).commit();
+			
+		}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

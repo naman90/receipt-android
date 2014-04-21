@@ -1,5 +1,11 @@
 package ie.rm.activities.util;
 
+import ie.rm.activities.model.Receipt;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import android.app.Activity;
 import android.content.Context;
 
@@ -53,5 +59,22 @@ public class PersistenceManager {
          	return false;
          }
 	}
+	
+	public List<Receipt> receiptList(){
+		List<Receipt> list= new ArrayList<Receipt>();
+		Receipt receipt= new Receipt();
+		receipt.setDate(new Date());
+		receipt.setReceiptId("1");
+		receipt.setPrice(12.22);
+		receipt.setStore("Tam");
+		receipt.setDescription("Mela Store");
+		list.add(receipt);
+		return list;
+	}
+	
+	public void deleteReceipt(Receipt receipt){
+		
+	}
+	
 
 }

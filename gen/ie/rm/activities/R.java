@@ -53,7 +53,7 @@ public final class R {
         public static final int description=0x7f090006;
         public static final int descriptionLabel=0x7f090007;
         public static final int euroLabel=0x7f09000a;
-        public static final int homeListReceipt=0x7f09000d;
+        public static final int fragment_layout=0x7f09000d;
         public static final int imageAccept=0x7f090019;
         public static final int imgDelete=0x7f09000f;
         public static final int infoLabel=0x7f090015;

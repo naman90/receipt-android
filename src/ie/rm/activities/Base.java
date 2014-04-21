@@ -28,7 +28,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 public class Base extends Activity {
 
 	protected 		Bundle 				activityInfo;
-	public 			Fragment 			coffeeFragment;
+	public 			Fragment 			receiptFragment;
 	static Receipt receipt;
 	
 
@@ -95,8 +95,8 @@ public class Base extends Activity {
 		super.onDestroy();
 	}
 
-	public Fragment getCoffeeFragment() {
-		return coffeeFragment;
+	public Fragment receiptFragment() {
+		return receiptFragment;
 	}
 	
 	public void setSpinnerListener(int id, int data,

@@ -11,12 +11,13 @@
         android:text="@string/home_add_receipt_button"
         android:onClick="addNewReceipt" />
 
-    <TextView
-        android:id="@+id/homeListReceipt"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+    <FrameLayout
+        android:id="@+id/fragment_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@+id/addReceiptHomeButton"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" />
+        android:layout_centerHorizontal="true">
+
+    </FrameLayout>
 
 </RelativeLayout>
