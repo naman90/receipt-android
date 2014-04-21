@@ -66,9 +66,12 @@
 
         <activity
             android:name="ie.rm.activities.AddReceipt"
-            android:label="@string/title_activity_add_receipt" 
-            android:parentActivityName="ie.rm.activities.ReceiptDisplay"
-            >
+            android:label="@string/title_activity_add_receipt"
+            android:parentActivityName="ie.rm.activities.ReceiptDisplay" >
+        </activity>
+        <activity
+            android:name="ie.rm.activities.Settings"
+            android:label="@string/title_activity_settings" >
         </activity>
     </application>
 

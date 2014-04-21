@@ -32,9 +32,14 @@ public class Home extends Base {
 	}
 	
 	public boolean onOptionsItemSelected(MenuItem item) {
-	    // Handle presses on the action bar items
-	   Log.v("receiptmanager", "This is pressed");
-	   return super.onOptionsItemSelected(item);
+		switch (item.getItemId()) {
+		case R.id.action_settings:
+	        goToActivity(this, Settings.class,null);
+			return true;
+		default:
+            return super.onOptionsItemSelected(item);
+
+		}
 	}
 
 }

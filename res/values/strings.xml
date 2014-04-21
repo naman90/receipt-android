@@ -17,5 +17,9 @@
     <string name="priceLabel">Price</string>
     <string name="add_edit_receiptButton">Add Receipt</string>
     <string name="add_edit_receipt_button">Add Receipt</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="dropboxButtonText">Link Dropbox</string>
+    <string name="dropboxButtonUnlinkText">UnLink Dropbox</string>
+    <string name="settingsInfoLabel">A Dropbox Account is required to run this application</string>
 
 </resources>

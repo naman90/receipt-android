@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="46dp"
+    android:padding="8dp" >
+
+
+    <ImageView
+        android:id="@+id/imgDelete"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="fav"
+        android:src="@android:drawable/ic_delete"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/rowReceiptDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="26dp"
+        android:gravity="center_vertical"
+        android:text="Receipt Desc"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/rowPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imgDelete"
+        android:layout_marginRight="35dp"
+        android:layout_toLeftOf="@+id/imgDelete"
+        android:gravity="center_vertical"
+        android:text="€0.00"
+        android:textSize="11sp"
+        android:textStyle="bold"
+        tools:ignore="HardcodedText,SmallSp" />
+
+    <TextView
+        android:id="@+id/rowReceiptStore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/rowReceiptDescription"
+        android:layout_below="@+id/rowReceiptDescription"
+        android:gravity="center_vertical"
+        android:text="Receipt Store"
+        android:textSize="11sp"
+        android:textStyle="bold"
+        tools:ignore="HardcodedText,SmallSp" />
+
+    <TextView
+        android:id="@+id/rowDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imgDelete"
+        android:layout_marginRight="16dp"
+        android:layout_toLeftOf="@+id/imgDelete"
+        android:gravity="center_vertical"
+        android:text="12/10/2012"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        tools:ignore="HardcodedText" />
+
+</RelativeLayout>

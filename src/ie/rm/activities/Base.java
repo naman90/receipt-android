@@ -31,7 +31,6 @@ public class Base extends Activity {
 	public 			Fragment 			coffeeFragment;
 	static Receipt receipt;
 	
-; 
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
