@@ -36,6 +36,73 @@ public class PersistenceManager {
 	public static PersistenceManager getInstance(){
 		if(self==null){
 			self= new PersistenceManager();
+			self.receiptArray= new ArrayList<Receipt>();
+			Receipt receipt= new Receipt();
+			receipt.setDate(new Date());
+			receipt.setReceiptId("1");
+			receipt.setPrice(12.22);
+			receipt.setStore("Tam");
+			receipt.setDescription("Mela Store");
+			Receipt receipt1= new Receipt();
+			receipt1.setDate(new Date());
+			receipt1.setReceiptId("1");
+			receipt1.setPrice(12.22);
+			receipt1.setStore("Tam");
+			receipt1.setDescription("Mela Store");
+			Receipt receipt2= new Receipt();
+			receipt2.setDate(new Date());
+			receipt2.setReceiptId("1");
+			receipt2.setPrice(12.22);
+			receipt2.setStore("Tam");
+			receipt2.setDescription("Mela Store");
+			Receipt receipt3= new Receipt();
+			receipt3.setDate(new Date());
+			receipt3.setReceiptId("1");
+			receipt3.setPrice(12.22);
+			receipt3.setStore("Tam");
+			receipt3.setDescription("Mela Store");
+			Receipt receipt4= new Receipt();
+			receipt4.setDate(new Date());
+			receipt4.setReceiptId("1");
+			receipt4.setPrice(12.22);
+			receipt4.setStore("Tam");
+			receipt4.setDescription("Mela Store");
+			Receipt receipt5= new Receipt();
+			receipt5.setDate(new Date());
+			receipt5.setReceiptId("1");
+			receipt5.setPrice(12.22);
+			receipt5.setStore("Tam");
+			receipt5.setDescription("Mela Store");
+			Receipt receipt6= new Receipt();
+			receipt6.setDate(new Date());
+			receipt6.setReceiptId("1");
+			receipt6.setPrice(12.22);
+			receipt6.setStore("Tam");
+			receipt6.setDescription("Mela Store");
+			Receipt receipt7= new Receipt();
+			receipt7.setDate(new Date());
+			receipt7.setReceiptId("1");
+			receipt7.setPrice(12.22);
+			receipt7.setStore("Tam");
+			receipt7.setDescription("Mela Store");
+			Receipt receipt8= new Receipt();
+			receipt8.setDate(new Date());
+			receipt8.setReceiptId("1");
+			receipt8.setPrice(12.22);
+			receipt8.setStore("Tam");
+			receipt8.setDescription("Mela Store");
+			
+			self.receiptArray.add(receipt);
+			self.receiptArray.add(receipt1);
+			self.receiptArray.add(receipt2);
+			self.receiptArray.add(receipt3);
+			self.receiptArray.add(receipt4);
+			self.receiptArray.add(receipt5);
+			self.receiptArray.add(receipt6);
+			self.receiptArray.add(receipt7);
+			self.receiptArray.add(receipt8);
+			
+
 		}
 		return self;
 	}
@@ -75,14 +142,7 @@ public class PersistenceManager {
 	}
 	
 	public List<Receipt> receiptList(){
-		Receipt receipt= new Receipt();
-		receipt.setDate(new Date());
-		receipt.setReceiptId("1");
-		receipt.setPrice(12.22);
-		receipt.setStore("Tam");
-		receipt.setDescription("Mela Store");
-		receiptArray.add(receipt);
-		return receiptArray;
+				return receiptArray;
 		
 	}
 	

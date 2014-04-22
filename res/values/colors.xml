@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="appBGColor">#f8f9ff</color>
-  <color name="headerBGColor">#33b5e5</color>
+  <color name="appBGThemeColor">#F0F0F0</color>
+  <color name="navBarBGColor">#3399cc</color>
   <color name="buttonBGColor">#33b5e5</color>
+    <color name="background_holo_light">#F0F0F0</color>
   
   <!-- Font Colours -->
      <color name="appFontColor">#33b5e5</color>

@@ -28,7 +28,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 public class Base extends Activity {
 
 	protected 		Bundle 				activityInfo;
-	public 			Fragment 			receiptFragment;
+	public      	Fragment 			receiptFragment;
 	static Receipt receipt;
 	
 

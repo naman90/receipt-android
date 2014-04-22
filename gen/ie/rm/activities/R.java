@@ -11,14 +11,15 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
-        public static final int actionBarText=0x7f040004;
-        public static final int appBGColor=0x7f040000;
+        public static final int actionBarText=0x7f040005;
+        public static final int appBGThemeColor=0x7f040000;
         /**  Font Colours 
          */
-        public static final int appFontColor=0x7f040003;
+        public static final int appFontColor=0x7f040004;
+        public static final int background_holo_light=0x7f040003;
         public static final int buttonBGColor=0x7f040002;
-        public static final int buttonFontColor=0x7f040005;
-        public static final int headerBGColor=0x7f040001;
+        public static final int buttonFontColor=0x7f040006;
+        public static final int navBarBGColor=0x7f040001;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -39,33 +40,34 @@ public final class R {
         public static final int camera=0x7f020000;
         public static final int gallery=0x7f020001;
         public static final int ic_action_accept=0x7f020002;
-        public static final int ic_action_search=0x7f020003;
-        public static final int ic_action_settings=0x7f020004;
-        public static final int ic_launcher=0x7f020005;
+        public static final int ic_action_new=0x7f020003;
+        public static final int ic_action_search=0x7f020004;
+        public static final int ic_action_settings=0x7f020005;
+        public static final int ic_launcher=0x7f020006;
     }
     public static final class id {
-        public static final int RelativeLayout1=0x7f09000e;
-        public static final int action_search=0x7f090017;
-        public static final int action_settings=0x7f090018;
-        public static final int addReceiptHomeButton=0x7f09000c;
+        public static final int RelativeLayout1=0x7f09000d;
+        public static final int action_new=0x7f090018;
+        public static final int action_search=0x7f090016;
+        public static final int action_settings=0x7f090017;
         public static final int container=0x7f090000;
         public static final int datePicker=0x7f09000b;
         public static final int description=0x7f090006;
         public static final int descriptionLabel=0x7f090007;
         public static final int euroLabel=0x7f09000a;
-        public static final int fragment_layout=0x7f09000d;
+        public static final int fragment_layout=0x7f09000c;
         public static final int imageAccept=0x7f090019;
-        public static final int imgDelete=0x7f09000f;
-        public static final int infoLabel=0x7f090015;
-        public static final int linkDropboxButton=0x7f090014;
-        public static final int menuAccept=0x7f090016;
+        public static final int imgDelete=0x7f09000e;
+        public static final int infoLabel=0x7f090014;
+        public static final int linkDropboxButton=0x7f090013;
+        public static final int menuAccept=0x7f090015;
         public static final int price=0x7f090008;
         public static final int priceLabel=0x7f090009;
         public static final int receiptImageView=0x7f090001;
-        public static final int rowDate=0x7f090013;
-        public static final int rowPrice=0x7f090011;
-        public static final int rowReceiptDescription=0x7f090010;
-        public static final int rowReceiptStore=0x7f090012;
+        public static final int rowDate=0x7f090012;
+        public static final int rowPrice=0x7f090010;
+        public static final int rowReceiptDescription=0x7f09000f;
+        public static final int rowReceiptStore=0x7f090011;
         public static final int selectCameraButton=0x7f090002;
         public static final int selectGalleryButton=0x7f090003;
         public static final int storeName=0x7f090005;
@@ -88,26 +90,27 @@ public final class R {
         public static final int source=0x7f080005;
     }
     public static final class string {
-        public static final int action_accept=0x7f060004;
-        public static final int action_search=0x7f060003;
+        public static final int action_accept=0x7f060005;
+        public static final int action_new=0x7f060002;
+        public static final int action_search=0x7f060004;
         public static final int action_settings=0x7f060001;
-        public static final int add_edit_receiptButton=0x7f06000e;
-        public static final int add_edit_receipt_button=0x7f06000f;
+        public static final int add_edit_receiptButton=0x7f06000f;
+        public static final int add_edit_receipt_button=0x7f060010;
         public static final int app_name=0x7f060000;
-        public static final int descriptionLabel=0x7f06000b;
-        public static final int dropboxButtonText=0x7f060011;
-        public static final int dropboxButtonUnlinkText=0x7f060012;
-        public static final int euroSymbol=0x7f06000c;
-        public static final int hello_world=0x7f060002;
-        public static final int home_add_receipt_button=0x7f060005;
-        public static final int priceLabel=0x7f06000d;
-        public static final int receiptView=0x7f060008;
-        public static final int settingsInfoLabel=0x7f060013;
-        public static final int storeName=0x7f06000a;
-        public static final int title_activity_add_receipt=0x7f060009;
-        public static final int title_activity_receipt_display=0x7f060007;
-        public static final int title_activity_settings=0x7f060010;
-        public static final int title_activity_source=0x7f060006;
+        public static final int descriptionLabel=0x7f06000c;
+        public static final int dropboxButtonText=0x7f060012;
+        public static final int dropboxButtonUnlinkText=0x7f060013;
+        public static final int euroSymbol=0x7f06000d;
+        public static final int hello_world=0x7f060003;
+        public static final int home_add_receipt_button=0x7f060006;
+        public static final int priceLabel=0x7f06000e;
+        public static final int receiptView=0x7f060009;
+        public static final int settingsInfoLabel=0x7f060014;
+        public static final int storeName=0x7f06000b;
+        public static final int title_activity_add_receipt=0x7f06000a;
+        public static final int title_activity_receipt_display=0x7f060008;
+        public static final int title_activity_settings=0x7f060011;
+        public static final int title_activity_source=0x7f060007;
     }
     public static final class style {
         /** 
@@ -124,6 +127,6 @@ public final class R {
          */
         public static final int AppBaseTheme=0x7f070002;
         public static final int actionBarStyle=0x7f070001;
-        public static final int actionBarTheme=0x7f070000;
+        public static final int receiptAppTheme=0x7f070000;
     }
 }

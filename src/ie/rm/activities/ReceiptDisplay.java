@@ -24,7 +24,7 @@ public class ReceiptDisplay extends Base {
 		setContentView(R.layout.activity_receipt_display);
 		TouchImageView imageView=(TouchImageView)findViewById(R.id.receiptImageView);
 	    if(getIntent().getExtras()!=null &&getIntent().getExtras().getSerializable("receipt")!=null)
-		   receipt= (Receipt)getIntent().getExtras().getSerializable("receipt");
+		receipt= (Receipt)getIntent().getExtras().getSerializable("receipt");
 		mCurrentPhotoPath=receipt.getImage();
 		if(mCurrentPhotoPath!=null && mCurrentPhotoPath.length()>0){
 			setPic(imageView);

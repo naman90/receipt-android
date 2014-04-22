@@ -1,26 +1,26 @@
 package ie.rm.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 
 public class Home extends Base {
-	private ReceiptFragment receiptFragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.home);
+		if(savedInstanceState==null){
+		receiptFragment = new ReceiptFragment(); //create a new Fragment
+	    getFragmentManager().beginTransaction().add(R.id.fragment_layout, receiptFragment).commit();
+		}
+		
 	}
 	
 	 @Override
 		protected void onResume() {
-		  super.onResume();		
-		  receiptFragment = new ReceiptFragment(); //create a new Fragment
-	      getFragmentManager().beginTransaction().add(R.id.fragment_layout, receiptFragment).commit();
+		  super.onResume();	
 			
 		}
 
@@ -32,16 +32,15 @@ public class Home extends Base {
 		return super.onCreateOptionsMenu(menu);
 
 	}
-	public void addNewReceipt(View view){
-		Intent intent = new Intent(this, Source.class);
-		startActivity(intent);
-	}
 	
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.action_settings:
 	        goToActivity(this, Settings.class,null);
 			return true;
+			
+		case R.id.action_new:
+			goToActivity(this, Source.class,null);
 		default:
             return super.onOptionsItemSelected(item);
 
