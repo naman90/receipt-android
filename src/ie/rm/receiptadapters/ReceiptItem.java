@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 
 import ie.rm.activities.R;
 import ie.rm.activities.model.Receipt;
+import ie.rm.activities.util.ApplicationUtils;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,7 +33,7 @@ public class ReceiptItem {
 	private void updateControls(Receipt receipt) {
 		((TextView) view.findViewById(R.id.rowReceiptDescription)).setText(receipt.getDescription());
 		( (TextView)view.findViewById(R.id.rowReceiptStore)).setText(receipt.getStore());
-		( (TextView)view.findViewById(R.id.rowDate)).setText(new SimpleDateFormat("dd.MM.yyyy").format(receipt.getDate()));
+		( (TextView)view.findViewById(R.id.rowDate)).setText(ApplicationUtils.dateToString(receipt.getDate()));
 		( (TextView)view.findViewById(R.id.rowPrice)).setText("€ "+ new DecimalFormat("0.00").format(receipt.getPrice()));
 	}
 }
