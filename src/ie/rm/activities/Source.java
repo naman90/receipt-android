@@ -1,6 +1,7 @@
 package ie.rm.activities;
 
 import ie.rm.activities.model.Receipt;
+import ie.rm.activities.util.ApplicationUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,7 +32,8 @@ public class Source extends Base {
 			        // Create the File where the photo should go
 			        File photoFile = null;
 			        try {
-			            photoFile = createImageFile();
+			            photoFile = ApplicationUtils.createImageFile();
+			            mCurrentPhotoPath =  photoFile.getAbsolutePath();
 			        } catch (IOException ex) {
 			            // Error occurred while creating the File
 			           System.out.print(ex);
@@ -50,18 +52,7 @@ public class Source extends Base {
 		
 	}
 	
-	private File createImageFile() throws IOException {
-	    // Create an image file name
-	    File storageDir = Environment.getExternalStorageDirectory();
-	    File image = File.createTempFile(
-	        "temp",  /* prefix */
-	        ".jpg",         /* suffix */
-	        storageDir      /* directory */
-	    );
-
-	    mCurrentPhotoPath =  image.getAbsolutePath();
-	    return image;
-	}
+	
 	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		Intent intent = new Intent(this, ReceiptDisplay.class);

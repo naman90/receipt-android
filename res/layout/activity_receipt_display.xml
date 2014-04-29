@@ -9,7 +9,8 @@
     <com.example.touch.TouchImageView
         android:id="@+id/receiptImageView"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" android:contentDescription="@string/receiptView"/>
+        android:contentDescription="@string/ImageLoading"
+        android:layout_height="fill_parent" />
         
 </FrameLayout>
 

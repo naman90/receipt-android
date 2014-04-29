@@ -1,7 +1,7 @@
 package ie.rm.activities;
 
-import ie.rm.activities.R;
 import ie.rm.activities.model.Receipt;
+import ie.rm.activities.util.DeleteReceiptWithAlert;
 import ie.rm.activities.util.PersistenceManager;
 import ie.rm.receiptadapters.ReceiptListAdapter;
 import android.app.Activity;
@@ -17,7 +17,7 @@ import android.widget.ListView;
 public class ReceiptFragment  extends ListFragment implements  OnClickListener
 { 
   protected Base 						activity;
-  protected static ReceiptListAdapter 	listAdapter;
+  public static ReceiptListAdapter 	listAdapter;
   protected ListView 					listView;
 
 @Override
@@ -46,39 +46,23 @@ public class ReceiptFragment  extends ListFragment implements  OnClickListener
   public void onClick(View view)
   {
 	  if(view.getTag() instanceof Receipt){
-		  onReceiptDelete((Receipt)view.getTag());
+		  DeleteReceiptWithAlert.deleteReceipt(view.getContext(), ((Receipt)view.getTag())).show();
 	  }
   } 
   
-  public void onReceiptDelete(final Receipt receipt)
-  {
-    String stringDesc = receipt.getDescription();
-    AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-    builder.setMessage("Are you sure you want to Delete the \'Receipt\' " + stringDesc + "?");
-    builder.setCancelable(false);
 
-    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener()
-    {
-      public void onClick(DialogInterface dialog, int id)
-      {
-       PersistenceManager.getInstance().deleteReceipt(receipt); // remove from our list
-        listAdapter.receiptList.remove(receipt); // update adapters data
-        listAdapter.notifyDataSetChanged(); // refresh adapter
-      }
-    }).setNegativeButton("No", new DialogInterface.OnClickListener()
-    {
-      public void onClick(DialogInterface dialog, int id)
-      {
-        dialog.cancel();
-      }
-    });
-    AlertDialog alert = builder.create();
-    alert.show();
-  }
 
 @Override
 public void onListItemClick(ListView l, View v, int position, long id) {
-	
+	  Object tag= v.getTag();
+	  if(tag instanceof Receipt){
+		  Receipt receipt =(Receipt) tag;
+		  Bundle receiptBundle = new Bundle();
+		  receiptBundle.putSerializable("receipt", receipt);
+		  Intent goEdit = new Intent(getActivity(), ReceiptDisplay.class);
+		  goEdit.putExtras(receiptBundle);
+		  getActivity().startActivity(goEdit);  
+	  }
 	  /*  Bundle activityInfo = new Bundle(); // Creates a new Bundle object
 	    activityInfo.putInt("coffeeID", v.getId() );
 	    

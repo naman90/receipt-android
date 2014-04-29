@@ -1,41 +1,56 @@
 package ie.rm.activities;
 
 import ie.rm.activities.model.Receipt;
-import ie.rm.activities.util.ExifUtil;
-
-import java.io.File;
-
-import android.content.Intent;
+import ie.rm.activities.util.ApplicationUtils;
+import android.app.ProgressDialog;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
 
 import com.example.touch.TouchImageView;
 
-public class ReceiptDisplay extends Base {
+public class ReceiptDisplay extends Base  {
     String mCurrentPhotoPath;
+    TouchImageView imageView;
+    ProgressDialog progressDialog;
+    Bitmap bitmap=null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_receipt_display);
-		TouchImageView imageView=(TouchImageView)findViewById(R.id.receiptImageView);
+	    imageView=(TouchImageView)findViewById(R.id.receiptImageView);
 	    if(getIntent().getExtras()!=null &&getIntent().getExtras().getSerializable("receipt")!=null)
 		receipt= (Receipt)getIntent().getExtras().getSerializable("receipt");
-		mCurrentPhotoPath=receipt.getImage();
-		if(mCurrentPhotoPath!=null && mCurrentPhotoPath.length()>0){
-			setPic(imageView);
-		}
 	}
 	
+	
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if(receipt.getReceiptId()!=null && receipt.getReceiptId().length()>0){
+			bitmap=ApplicationUtils.loadImageFromFileSystem(receipt.getImage());
+			imageView.setImageBitmap(bitmap);
+		}else{
+			bitmap = ApplicationUtils.loadImage(receipt.getImage());
+			imageView.setImageBitmap(bitmap);
+	
+		}
+	}
+
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
+		if(receipt.getReceiptId()!=null){
+			getMenuInflater().inflate(R.menu.edit_menu, menu);
+			getActionBar().setDisplayHomeAsUpEnabled(false);
+		}else{
 		getMenuInflater().inflate(R.menu.accept_menu, menu);
+		}
 		return true;
 	}
 	
@@ -49,38 +64,44 @@ public class ReceiptDisplay extends Base {
 			receiptBundle.putSerializable("receipt", receipt);
 	        goToActivity(this, AddReceipt.class, receiptBundle);
 			return true;
+		case R.id.menuEdit:
+			Bundle receiptEditBundle = new Bundle();
+			receiptEditBundle.putSerializable("receipt", receipt);
+	        goToActivity(this, AddReceipt.class, receiptEditBundle);
+			return true;
+		case R.id.menuHome:
+			goToActivity(this, Home.class, null);
 		default:
             return super.onOptionsItemSelected(item);
-
+			
 		}
+			
+			
 	}
 
-
-	Bitmap readImage(String imagePath){
-		File imgFile = new  File(imagePath);
-		if(imgFile.exists()){
-		    Bitmap bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-		    return bitmap;
-		}
-		return null;
+	@Override
+	protected void onStop() {
+		bitmap=null;
+		super.onStop();
+		
 	}
-
-	 private void setPic(ImageView imageView) {
-		 File file = new File(mCurrentPhotoPath);
-		    // Get the dimensions of the bitmap
-		    BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-		    bmOptions.inJustDecodeBounds = true;
-		    BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
-		    int photoW = bmOptions.outWidth;
-		    int photoH = bmOptions.outHeight;
-		    // Determine how much to scale down the image
-		    // Decode the image file into a Bitmap sized to fill the View
-		    bmOptions.inJustDecodeBounds = false;
-		    bmOptions.inPurgeable = true;
-		    Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
-		    bitmap=ExifUtil.rotateBitmap(file.getAbsolutePath(), bitmap);
-		    imageView.setImageBitmap(bitmap);
-		}
+	 
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		bitmap.recycle();
+		super.onPause();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		bitmap=null;
+		// TODO Auto-generated method stub
+		super.onDestroy();
+	}
+	 
+	 
+	
 
 
 }

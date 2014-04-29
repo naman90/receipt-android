@@ -7,6 +7,9 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_search">Search</string>
     <string name="action_accept">Accept</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_home">Home</string>
     <string name="home_add_receipt_button">Add receipt</string>
     <string name="title_activity_source">Source</string>
     <string name="title_activity_receipt_display">Receipt</string>
@@ -21,6 +24,7 @@
     <string name="title_activity_settings">Settings</string>
     <string name="dropboxButtonText">Link Dropbox</string>
     <string name="dropboxButtonUnlinkText">UnLink Dropbox</string>
+     <string name="ImageLoading">Image Loading .....</string>
     <string name="settingsInfoLabel">A Dropbox Account is required to run this application</string>
 
 </resources>

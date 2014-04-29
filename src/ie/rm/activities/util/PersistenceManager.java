@@ -5,7 +5,7 @@ import ie.rm.activities.model.Receipt;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,11 +25,11 @@ import com.dropbox.sync.android.DbxTable;
 
 public class PersistenceManager {
 	  
-	private  DbxAccountManager mAccountManager;
-	private  DbxAccount mAccount;
-	private  DbxDatastore store;
-	private  DbxFileSystem dbxFs;
-	private  DbxTable table;
+	private  static DbxAccountManager mAccountManager;
+	private  static DbxAccount mAccount;
+	private  static DbxDatastore store;
+	private  static DbxFileSystem dbxFs;
+	private  static DbxTable table;
 	private static PersistenceManager self;
 	private List<Receipt> receiptArray;
 	
@@ -37,78 +37,16 @@ public class PersistenceManager {
 		if(self==null){
 			self= new PersistenceManager();
 			self.receiptArray= new ArrayList<Receipt>();
-			Receipt receipt= new Receipt();
-			receipt.setDate(new Date());
-			receipt.setReceiptId("1");
-			receipt.setPrice(12.22);
-			receipt.setStore("Tam");
-			receipt.setDescription("Mela Store");
-			Receipt receipt1= new Receipt();
-			receipt1.setDate(new Date());
-			receipt1.setReceiptId("1");
-			receipt1.setPrice(12.22);
-			receipt1.setStore("Tam");
-			receipt1.setDescription("Mela Store");
-			Receipt receipt2= new Receipt();
-			receipt2.setDate(new Date());
-			receipt2.setReceiptId("1");
-			receipt2.setPrice(12.22);
-			receipt2.setStore("Tam");
-			receipt2.setDescription("Mela Store");
-			Receipt receipt3= new Receipt();
-			receipt3.setDate(new Date());
-			receipt3.setReceiptId("1");
-			receipt3.setPrice(12.22);
-			receipt3.setStore("Tam");
-			receipt3.setDescription("Mela Store");
-			Receipt receipt4= new Receipt();
-			receipt4.setDate(new Date());
-			receipt4.setReceiptId("1");
-			receipt4.setPrice(12.22);
-			receipt4.setStore("Tam");
-			receipt4.setDescription("Mela Store");
-			Receipt receipt5= new Receipt();
-			receipt5.setDate(new Date());
-			receipt5.setReceiptId("1");
-			receipt5.setPrice(12.22);
-			receipt5.setStore("Tam");
-			receipt5.setDescription("Mela Store");
-			Receipt receipt6= new Receipt();
-			receipt6.setDate(new Date());
-			receipt6.setReceiptId("1");
-			receipt6.setPrice(12.22);
-			receipt6.setStore("Tam");
-			receipt6.setDescription("Mela Store");
-			Receipt receipt7= new Receipt();
-			receipt7.setDate(new Date());
-			receipt7.setReceiptId("1");
-			receipt7.setPrice(12.22);
-			receipt7.setStore("Tam");
-			receipt7.setDescription("Mela Store");
-			Receipt receipt8= new Receipt();
-			receipt8.setDate(new Date());
-			receipt8.setReceiptId("1");
-			receipt8.setPrice(12.22);
-			receipt8.setStore("Tam");
-			receipt8.setDescription("Mela Store");
-			
-			self.receiptArray.add(receipt);
-			self.receiptArray.add(receipt1);
-			self.receiptArray.add(receipt2);
-			self.receiptArray.add(receipt3);
-			self.receiptArray.add(receipt4);
-			self.receiptArray.add(receipt5);
-			self.receiptArray.add(receipt6);
-			self.receiptArray.add(receipt7);
-			self.receiptArray.add(receipt8);
-			
-
 		}
 		return self;
 	}
 	
 	public void initializePersistence(Context application){
 		mAccountManager = DbxAccountManager.getInstance(application, "v3c5yh4aunuc0su", "6zms1t85qxcdjoh");
+	}
+	
+	public boolean isAccountSetup(){
+		return mAccountManager!=null &&mAccount!=null && mAccount.isLinked();
 	}
 	public boolean linkDropBox(Activity initiatingActivity,int requestCode){
 		if(mAccountManager.hasLinkedAccount())
@@ -118,6 +56,12 @@ public class PersistenceManager {
 		return false;
 	}
 	
+	public void unlinkDropbox(){
+		if(mAccount!=null)
+		mAccount.unlink();
+		
+	}
+	
 	public boolean setupPersistenceIfLinked(){
 		 mAccount = mAccountManager.getLinkedAccount();
          if(mAccount!=null){
@@ -125,6 +69,8 @@ public class PersistenceManager {
         	try{
         	if(store==null){
         		store=DbxDatastore.openDefault(mAccount);
+        		store.addSyncStatusListener(new ReceiptStoreSyncListener());
+        		
         	}
         	if(dbxFs==null){
         		dbxFs = DbxFileSystem.forAccount(mAccountManager.getLinkedAccount());
@@ -142,11 +88,56 @@ public class PersistenceManager {
 	}
 	
 	public List<Receipt> receiptList(){
-				return receiptArray;
-		
+		if(receiptArray.size()==0){
+			loadRecordsInArray();
+		}
+		return receiptArray;
 	}
 	
-	public void deleteReceipt(Receipt receipt){
+	public void loadRecordsInArray(){
+		if(mAccount!=null && mAccount.isLinked()){
+		if(table!=null){
+			try{
+			DbxTable.QueryResult queryResult = table.query();
+			Iterator<DbxRecord> receiptIterator=queryResult.iterator();
+			while(receiptIterator.hasNext()){
+				DbxRecord record = receiptIterator.next();
+				receiptArray.add(getReceiptFromDbRecord(record));
+			}
+			}catch(Exception exception){
+				Log.e(this.getClass().getName(), exception.getMessage());
+				return;
+			}
+		}
+		}
+	}
+	
+	public Receipt getReceiptFromDbRecord(DbxRecord record){
+		Receipt receipt = new Receipt();
+		receipt.setReceiptId(record.getId());
+		receipt.setStore(record.getString("store"));
+		receipt.setDescription(record.getString("description"));
+		receipt.setPrice(Double.parseDouble(record.getString("price")));
+		receipt.setImage(record.getString("image"));
+		receipt.setDate(ApplicationUtils.stringToDate(record.getString("date")));
+		return receipt;
+	}
+	
+	public boolean deleteReceipt(Receipt receipt){
+	try{
+	  DbxRecord receiptRecord=	table.get(receipt.getReceiptId());
+	  if(receiptRecord!=null){
+		  String imageLocation= receipt.getImage();
+		  receiptRecord.deleteRecord();
+		  receiptArray.remove(receiptArray.indexOf(receipt));
+		  deleteFileAtLocation(imageLocation);
+		  store.sync();
+	  }
+	  return true;
+	}catch(Exception e){
+		Log.w(this.getClass().getName(), e);
+		return false;
+	}
 		
 	}
 	
@@ -160,6 +151,7 @@ public class PersistenceManager {
 			receiptArray.add(receipt);
 			try {
 				store.sync();
+				Log.v(this.getClass().getName(), "Saved Receipt"+receipt);
 			} catch (DbxException e) {
 				Log.w(this.getClass().getName(), e);
 			}
@@ -169,7 +161,7 @@ public class PersistenceManager {
 	
 	
 	public String storeImageToFileSystemForReceipt(Receipt receipt){
-		String fileName= receipt.getStore()+ApplicationUtils.dateToString(receipt.getDate())+UUID.randomUUID().toString()+".png";
+		String fileName= receipt.getStore()+ApplicationUtils.dateToFlatString(receipt.getDate())+UUID.randomUUID().toString()+".png";
 		File tempFile = new File(receipt.getImage());
 		try{
 		if(tempFile.exists()){
@@ -177,6 +169,7 @@ public class PersistenceManager {
 		receiptImageFile.writeFromExistingFile(tempFile, false);
 		receipt.setImage(fileName);
 		tempFile.delete();
+		receiptImageFile.close();
 		}
 		}catch(DbxException dbxEcxeption){
 			Log.e(this.getClass().getName(), "Error in DropBox File Creation");
@@ -190,5 +183,77 @@ public class PersistenceManager {
 		
 	}
 	
+	public DbxFile getDbxFile(String  locationPath){
+	 try{
+	  DbxFile file= dbxFs.open(new DbxPath(locationPath));
+	  return file;
+	 }catch(Exception e){
+		 Log.e(this.getClass().getName(), e.getMessage());
+		 return null;
+	 }
+	  
+	}
+	
+	public void syncAddReceipt(Receipt receipt)
+	{
+	   receiptArray.add(receipt);
+	}
+
+
+public void deleteAllRecords()
+{
+    if(table!=null&& dbxFs!=null){
+    	try{
+    	DbxTable.QueryResult queryResult = store.getTable("receipts").query();
+    	Iterator<DbxRecord> receiptIterator=queryResult.iterator();
+		while(receiptIterator.hasNext()){
+			DbxRecord record = receiptIterator.next();
+			String image = record.getString("image");
+			record.deleteRecord();
+			//if(image!=null && image.length()>0){
+			//	deleteFileAtLocation(image);
+		     //}
+         }
+		store.sync();
+    	}catch(Exception exception){
+    		Log.w(this.getClass().getName(),exception.getMessage());
+    	}
+    }
+}
+
+  void deleteFileAtLocation(String location)
+{
+	  DbxPath path = new DbxPath(location);
+      try{
+	  dbxFs.delete(path);
+      }catch(Exception exception){
+    	  Log.w(this.getClass().getName(),exception.getMessage());
+      }
+    
+}
+  
+  public void updateReceipt(Receipt receipt)
+  {
+	  try{
+	  DbxRecord receiptRecord=	table.get(receipt.getReceiptId());
+	  receiptRecord.set("description", receipt.getDescription()).set("store", receipt.getStore())
+	  .set("price", receipt.getPrice().toString()).set("date", ApplicationUtils.dateToString(receipt.getDate()));
+      store.sync();
+      for(Receipt receiptInArray:receiptArray){
+    	  if(receiptInArray.getReceiptId().equals(receipt.getReceiptId())){
+    		  receiptInArray.setDescription(receipt.getDescription());
+    		  receiptInArray.setStore(receipt.getStore());
+    		  receiptInArray.setPrice(receipt.getPrice());
+    		  receiptInArray.setDate(receipt.getDate());
+    	  }
+      }
+	  }catch(Exception e){
+		  Log.w(this.getClass().getName(), e);
+	  }
+	 
+
+  }
+
+
 
 }

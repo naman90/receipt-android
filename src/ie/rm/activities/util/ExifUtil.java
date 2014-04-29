@@ -8,15 +8,32 @@ import java.lang.reflect.Method;
 
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.os.Build;
+import android.util.Log;
 
 public class ExifUtil {
+	
+	public static Bitmap rotateBitmap90Degrees(Bitmap bitmap)
+	{
+		return rotateBitmap(6, bitmap);
+	}
+	
+	public static Bitmap rotateBitmapFromSrc(String src,Bitmap bitmap){
+		try{
+		int orientation = getExifOrientation(src);
+		return rotateBitmap(orientation, bitmap);
+		}catch(Exception e){
+			Log.v("ExifUtil", e.getMessage());
+		}
+		return null;
+	}
+	
+	
 	/**
 	 * @see http://sylvana.net/jpegcrop/exif_orientation.html
 	 */
-	public static Bitmap rotateBitmap(String src, Bitmap bitmap) {
-		try {
-			int orientation = getExifOrientation(src);
+	public static Bitmap rotateBitmap(int orientation, Bitmap bitmap) {
 			if (orientation == 1) {
 				return bitmap;
 			}
@@ -58,12 +75,12 @@ public class ExifUtil {
 				e.printStackTrace();
 				return bitmap;
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return bitmap;
+		
 	}
 
+	
+	
+	
 	private static int getExifOrientation(String src) throws IOException {
 		int orientation = 1;
 		try {

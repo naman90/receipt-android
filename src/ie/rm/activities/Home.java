@@ -1,5 +1,6 @@
 package ie.rm.activities;
 
+import ie.rm.activities.util.PersistenceManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,7 +29,7 @@ public class Home extends Base {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.actiobaritems, menu);
+		inflater.inflate(R.menu.home_menu, menu);
 		return super.onCreateOptionsMenu(menu);
 
 	}
@@ -46,5 +47,11 @@ public class Home extends Base {
 
 		}
 	}
+
+	@Override
+	public void onBackPressed() {
+		this.finish();
+	}
+	
 
 }

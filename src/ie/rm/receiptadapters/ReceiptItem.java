@@ -23,6 +23,7 @@ public class ReceiptItem {
 		LayoutInflater inflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		view = inflater.inflate(R.layout.receiptrow, parent, false);
+		view.setTag(receipt);
 		//view.setId(coffee.getCoffeeId());
 		updateControls(receipt);
 		ImageView imgDelete = (ImageView) view.findViewById(R.id.imgDelete);

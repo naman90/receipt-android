@@ -10,6 +10,7 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,16 +28,40 @@ public class Settings extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.settings);
 		dropboxButton=(Button)findViewById(R.id.linkDropboxButton);
+		if(PersistenceManager.getInstance().isAccountSetup()){
+			dropboxButton.setText(R.string.dropboxButtonUnlinkText);
+		}else{
+			dropboxButton.setText(R.string.dropboxButtonText);
+			getActionBar().setDisplayHomeAsUpEnabled(false);
+		}
 		PersistenceManager.getInstance().initializePersistence(getApplicationContext());
 	
 	}
 	
 	public void dropboxButtonAction(View view){
+		if(dropboxButton.getText().equals( getResources().getString(R.string.dropboxButtonUnlinkText))){
+			PersistenceManager.getInstance().unlinkDropbox();
+			getActionBar().setDisplayHomeAsUpEnabled(false);
+			dropboxButton.setText(R.string.dropboxButtonText);
+			return;
+		}
 		boolean isSetup=PersistenceManager.getInstance().linkDropBox(this,REQUEST_LINK_TO_DBX);
 		if(isSetup){
 			dropboxButton.setText(R.string.dropboxButtonUnlinkText);
+			getActionBar().setDisplayHomeAsUpEnabled(true);
 		}
 	}
+	
+	/*public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	    // Respond to the action bar's Up/Home button
+	    case android.R.id.home:
+	        NavUtils.navigateUpFromSameTask(this);
+	        return true;
+	    }
+	    return super.onOptionsItemSelected(item);
+	}
+	*/
 	
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -45,6 +70,7 @@ public class Settings extends Activity {
 	            if(PersistenceManager.getInstance().setupPersistenceIfLinked()){
 	            	//Update the Button text to unlink
 	            	dropboxButton.setText(R.string.dropboxButtonUnlinkText);
+	            	getActionBar().setDisplayHomeAsUpEnabled(true);
 	            }
 	        } else {
 	            // ... Link failed or was cancelled by the user.Do nothing
