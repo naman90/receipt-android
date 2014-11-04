@@ -41,6 +41,8 @@ public class Settings extends Activity {
 	public void dropboxButtonAction(View view){
 		if(dropboxButton.getText().equals( getResources().getString(R.string.dropboxButtonUnlinkText))){
 			PersistenceManager.getInstance().unlinkDropbox();
+			PersistenceManager.getInstance().clearReceiptArray();
+			ReceiptFragment.listAdapter.notifyDataSetChanged();
 			getActionBar().setDisplayHomeAsUpEnabled(false);
 			dropboxButton.setText(R.string.dropboxButtonText);
 			return;
@@ -51,17 +53,6 @@ public class Settings extends Activity {
 			getActionBar().setDisplayHomeAsUpEnabled(true);
 		}
 	}
-	
-	/*public boolean onOptionsItemSelected(MenuItem item) {
-	    switch (item.getItemId()) {
-	    // Respond to the action bar's Up/Home button
-	    case android.R.id.home:
-	        NavUtils.navigateUpFromSameTask(this);
-	        return true;
-	    }
-	    return super.onOptionsItemSelected(item);
-	}
-	*/
 	
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -78,6 +69,11 @@ public class Settings extends Activity {
 	    } else {
 	        super.onActivityResult(requestCode, resultCode, data);
 	    }
+	}
+
+	@Override
+	public void onBackPressed() {
+	//Do nothing	
 	}
 
 

@@ -3,11 +3,10 @@
   <color name="appBGThemeColor">#F0F0F0</color>
   <color name="navBarBGColor">#3399cc</color>
   <color name="buttonBGColor">#33b5e5</color>
-    <color name="background_holo_light">#F0F0F0</color>
   
   <!-- Font Colours -->
      <color name="appFontColor">#33b5e5</color>
-     <color name="actionBarText">#0099cc</color>
+     <color name="actionBarText">#F0F0F0</color>
      <color name="buttonFontColor">#33b5e5</color>
 </resources>
 

@@ -2,6 +2,7 @@ package ie.rm.activities;
 
 import ie.rm.activities.model.Receipt;
 import ie.rm.activities.util.ApplicationUtils;
+import ie.rm.async.DisplayImageTask;
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -13,7 +14,7 @@ import com.example.touch.TouchImageView;
 public class ReceiptDisplay extends Base  {
     String mCurrentPhotoPath;
     TouchImageView imageView;
-    ProgressDialog progressDialog;
+    public ProgressDialog progressDialog;
     Bitmap bitmap=null;
 
 	@Override
@@ -30,17 +31,9 @@ public class ReceiptDisplay extends Base  {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if(receipt.getReceiptId()!=null && receipt.getReceiptId().length()>0){
-			bitmap=ApplicationUtils.loadImageFromFileSystem(receipt.getImage());
-			imageView.setImageBitmap(bitmap);
-		}else{
-			bitmap = ApplicationUtils.loadImage(receipt.getImage());
-			imageView.setImageBitmap(bitmap);
-	
-		}
+		new DisplayImageTask(this).execute(receipt); 
+		
 	}
-
-
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -69,14 +62,10 @@ public class ReceiptDisplay extends Base  {
 			receiptEditBundle.putSerializable("receipt", receipt);
 	        goToActivity(this, AddReceipt.class, receiptEditBundle);
 			return true;
-		case R.id.menuHome:
-			goToActivity(this, Home.class, null);
 		default:
             return super.onOptionsItemSelected(item);
 			
-		}
-			
-			
+		}			
 	}
 
 	@Override
@@ -88,19 +77,17 @@ public class ReceiptDisplay extends Base  {
 	 
 	@Override
 	protected void onPause() {
-		// TODO Auto-generated method stub
-		bitmap.recycle();
+		if(bitmap!=null &&!bitmap.isRecycled())
+		   bitmap.recycle();
 		super.onPause();
 	}
 	
-	@Override
-	protected void onDestroy() {
-		bitmap=null;
-		// TODO Auto-generated method stub
-		super.onDestroy();
+	public void setBitmapToView(Bitmap bitmap){
+	    this.bitmap=bitmap;
+		imageView.setImageBitmap(bitmap);	
 	}
-	 
-	 
+	
+
 	
 
 

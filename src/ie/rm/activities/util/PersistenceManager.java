@@ -141,6 +141,10 @@ public class PersistenceManager {
 		
 	}
 	
+	public void clearReceiptArray(){
+		receiptArray.clear();
+	}
+	
 	public void addReceipt(Receipt receipt){
 		String imageName = storeImageToFileSystemForReceipt(receipt);
 		if(imageName!=null && imageName.length()>0){

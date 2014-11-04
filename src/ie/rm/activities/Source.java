@@ -2,19 +2,19 @@ package ie.rm.activities;
 
 import ie.rm.activities.model.Receipt;
 import ie.rm.activities.util.ApplicationUtils;
-
 import java.io.File;
 import java.io.IOException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
 
 public class Source extends Base {
 	static final int REQUEST_TAKE_PHOTO = 1;
+	static final int REQUEST_GALLERY_PHOTO = 2;
     protected    String  mCurrentPhotoPath;
 
 	@Override
@@ -22,6 +22,11 @@ public class Source extends Base {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_source);
 
+	}
+	
+	public void imageFromGallery(View view){
+		Intent captureImageIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+		startActivityForResult(captureImageIntent,REQUEST_GALLERY_PHOTO);
 	}
 	
 	public void intentToStartCamera(View view){
@@ -55,6 +60,16 @@ public class Source extends Base {
 	
 	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(requestCode==REQUEST_GALLERY_PHOTO && resultCode== RESULT_OK && data!=null){
+			 Uri selectedImage = data.getData();
+	         String[] filePathColumn = { MediaStore.Images.Media.DATA };
+	         Cursor cursor = getContentResolver().query(selectedImage,
+	                 filePathColumn, null, null, null);
+	         cursor.moveToFirst();
+	         int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+	         mCurrentPhotoPath = cursor.getString(columnIndex);
+	         cursor.close();
+		}
 		Intent intent = new Intent(this, ReceiptDisplay.class);
 		Bundle imageLocation = new Bundle();
 		 receipt = new Receipt();
@@ -63,6 +78,8 @@ public class Source extends Base {
 		intent.putExtras(imageLocation);
         startActivity(intent);
 	}
+	
+	
 	
 	
 

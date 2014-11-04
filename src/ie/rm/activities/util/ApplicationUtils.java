@@ -66,7 +66,6 @@ public class ApplicationUtils {
 	
 	public static Bitmap loadImageFromFileSystem(String mCurrentPhotoPath) {
 		DbxFile dbXfile=PersistenceManager.getInstance().getDbxFile(mCurrentPhotoPath);
-		
 		try{
 		Bitmap bitmap= BitmapFactory.decodeStream(dbXfile.getReadStream());
 		dbXfile.close();

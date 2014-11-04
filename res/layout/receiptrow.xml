@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/RelativeLayout1"
     android:layout_width="fill_parent"
-    android:layout_height="60dp"
+    android:layout_height="70dp"
     android:padding="8dp" >
 
 
@@ -14,7 +14,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:contentDescription="fav"
-        android:src="@android:drawable/ic_delete"
+        android:src="@drawable/ic_action_remove"
         tools:ignore="HardcodedText" />
 
     <TextView
@@ -24,7 +24,8 @@
         android:layout_marginLeft="26dp"
         android:gravity="center_vertical"
         android:text="Receipt Desc"
-        android:textSize="14sp"
+        android:textColor="@color/navBarBGColor"
+        android:textSize="15sp"
         android:textStyle="bold"
         tools:ignore="HardcodedText" />
 
@@ -34,10 +35,12 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/imgDelete"
         android:layout_marginRight="35dp"
+        android:layout_marginTop="15dp"
         android:layout_toLeftOf="@+id/imgDelete"
         android:gravity="center_vertical"
         android:text="€0.00"
-        android:textSize="11sp"
+        android:textColor="@color/navBarBGColor"
+        android:textSize="12sp"
         android:textStyle="bold"
         tools:ignore="HardcodedText,SmallSp" />
 
@@ -49,7 +52,8 @@
         android:layout_below="@+id/rowReceiptDescription"
         android:gravity="center_vertical"
         android:text="Receipt Store"
-        android:textSize="11sp"
+        android:textColor="@color/navBarBGColor"
+        android:textSize="15sp"
         android:textStyle="bold"
         tools:ignore="HardcodedText,SmallSp" />
 
@@ -62,7 +66,8 @@
         android:layout_toLeftOf="@+id/imgDelete"
         android:gravity="center_vertical"
         android:text="12/10/2012"
-        android:textSize="14sp"
+        android:textColor="@color/navBarBGColor"
+        android:textSize="12sp"
         android:textStyle="bold"
         tools:ignore="HardcodedText" />
 

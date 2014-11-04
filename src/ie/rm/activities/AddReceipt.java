@@ -6,6 +6,7 @@ import ie.rm.activities.util.PersistenceManager;
 import java.text.DecimalFormat;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.DialogInterface.OnDismissListener;
 import android.os.Bundle;
 import android.view.Menu;
@@ -40,13 +41,13 @@ public class AddReceipt extends Base implements OnDismissListener{
     
 	}
 
-	
 	public boolean onCreateOptionsMenu(Menu menu) {
 
 		// Inflate the menu; this adds items to the action bar if it is present.
 		if(receipt.getReceiptId()!=null && receipt.getReceiptId().length()>0){
 			getMenuInflater().inflate(R.menu.accept_reject_menu, menu);
 			getActionBar().setDisplayHomeAsUpEnabled(false);
+			getActionBar().setTitle("Receipt Details");
 		}
 		else{
 			getMenuInflater().inflate(R.menu.accept_menu, menu);
@@ -57,16 +58,9 @@ public class AddReceipt extends Base implements OnDismissListener{
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.menuAccept) {
 			saveOrUpdateReceipt();
-			return true;
-		}
-		if(id==R.id.menuHome){
-			goToActivity(this, Home.class, null);
 			return true;
 		}
 		if (id == R.id.menuDelete) {
@@ -112,9 +106,17 @@ public class AddReceipt extends Base implements OnDismissListener{
 
 	@Override
 	public void onDismiss(DialogInterface arg0) {
-		// TODO Auto-generated method stu
 		if(receipt.getReceiptId()==null)
 			goToActivity(this, Home.class, null);
+	}
+	
+	@Override
+	public void onBackPressed() {
+		if(receipt!=null && receipt.getReceiptId()!=null && receipt.getReceiptId().length()>0){
+			goToActivity(this, Home.class, null);
+		}else{
+			super.onBackPressed();
+		}
 	}
 
 

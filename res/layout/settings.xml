@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="ie.rm.activities.Settings"
-    tools:ignore="MergeRootFrame" >
+    tools:ignore="MergeRootFrame"
+    android:background="@color/appBGThemeColor" >
 
     <Button
         android:id="@+id/linkDropboxButton"
@@ -14,6 +15,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="124dp"
         android:text="@string/dropboxButtonText"
+        android:background="@drawable/bluebgbutton"
+        android:textColor="@color/actionBarText"
+        android:padding="20dp"
         android:onClick="dropboxButtonAction" />
 
     <TextView
@@ -24,7 +28,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="@string/settingsInfoLabel"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:gravity="center" />
 
 </RelativeLayout>
 

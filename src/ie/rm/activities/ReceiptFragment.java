@@ -3,22 +3,21 @@ package ie.rm.activities;
 import ie.rm.activities.model.Receipt;
 import ie.rm.activities.util.DeleteReceiptWithAlert;
 import ie.rm.activities.util.PersistenceManager;
+import ie.rm.receiptadapters.ReceiptFilter;
 import ie.rm.receiptadapters.ReceiptListAdapter;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ListFragment;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ListView;
 
-public class ReceiptFragment  extends ListFragment implements  OnClickListener
+public class ReceiptFragment extends ListFragment implements  OnClickListener
 { 
   protected Base 						activity;
-  public static ReceiptListAdapter 	listAdapter;
-  protected ListView 					listView;
+  public static ReceiptListAdapter 	    listAdapter;
+ 
 
 @Override
   public void onAttach(Activity activity)

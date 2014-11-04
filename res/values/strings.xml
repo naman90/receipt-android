@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">ReceiptManager</string>
+    <string name="app_name">ReceiptBox</string>
     <string name="action_settings">Settings</string>
+     <string name="action_exit">Exit</string>
     <string name="action_new">Add a Receipt</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_search">Search</string>
@@ -15,6 +16,7 @@
     <string name="title_activity_receipt_display">Receipt</string>
     <string name="receiptView">Image View to display Receipt</string>
     <string name="title_activity_add_receipt">AddReceipt</string>
+    <string name="title_activity_search">Search</string>
     <string name="storeName">Store</string>
     <string name="descriptionLabel">Description</string>
     <string name="euroSymbol">€</string>
@@ -26,5 +28,7 @@
     <string name="dropboxButtonUnlinkText">UnLink Dropbox</string>
      <string name="ImageLoading">Image Loading .....</string>
     <string name="settingsInfoLabel">A Dropbox Account is required to run this application</string>
-
+    <string name="searchReceiptNameHint">Search Receipts</string>
+    <string name="searchReceiptTypePrompt">Search Receipts</string>
+    <string name="font">sans-serif</string>
 </resources>

@@ -1,6 +1,7 @@
 package ie.rm.activities;
 
 import ie.rm.activities.util.PersistenceManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,6 +13,9 @@ public class Home extends Base {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.home);
+		if(PersistenceManager.getInstance().isAccountSetup()==false){
+			goToActivity(this, Settings.class, null);
+		}
 		if(savedInstanceState==null){
 		receiptFragment = new ReceiptFragment(); //create a new Fragment
 	    getFragmentManager().beginTransaction().add(R.id.fragment_layout, receiptFragment).commit();
@@ -21,7 +25,10 @@ public class Home extends Base {
 	
 	 @Override
 		protected void onResume() {
-		  super.onResume();	
+		  super.onResume();
+		  if(PersistenceManager.getInstance().receiptList().isEmpty()){
+			  PersistenceManager.getInstance().loadRecordsInArray();
+		  }
 			
 		}
 
@@ -42,6 +49,16 @@ public class Home extends Base {
 			
 		case R.id.action_new:
 			goToActivity(this, Source.class,null);
+			return true;
+			
+		case R.id.action_search:
+			goToActivity(this, Search.class,null);
+			return true;
+		case	R.id.action_exit:
+			Intent startMain = new Intent(Intent.ACTION_MAIN);
+			startMain.addCategory(Intent.CATEGORY_HOME);
+			startActivity(startMain);
+			   return true;
 		default:
             return super.onOptionsItemSelected(item);
 
@@ -50,7 +67,9 @@ public class Home extends Base {
 
 	@Override
 	public void onBackPressed() {
-		this.finish();
+		Intent startMain = new Intent(Intent.ACTION_MAIN);
+		startMain.addCategory(Intent.CATEGORY_HOME);
+		startActivity(startMain);
 	}
 	
 

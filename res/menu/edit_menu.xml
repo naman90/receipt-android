@@ -6,9 +6,5 @@
           android:icon="@drawable/ic_action_edit"
           android:title="@string/action_edit"
           android:showAsAction="always" />
-     <item android:id="@+id/menuHome"
-          android:icon="@drawable/ic_action_view_as_list"
-          android:title="@string/action_home"
-          android:showAsAction="always" />
 
 </menu>
